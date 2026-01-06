@@ -1,100 +1,42 @@
-# Operator TUI
+# inference-operator-tui
 
-Terminal user interface for managing Local Inference Service deployments in Kubernetes.
+![Go](https://img.shields.io/badge/go-%2300ADD8.svg?style=flat&logo=go&logoColor=white) ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg) ![Kubernetes](https://img.shields.io/badge/kubernetes-compatible-blue?logo=kubernetes)
 
-## Features
+Terminal UI for local-inference-operator resources. CRDs, pod status, events, logs, GPU utilization in one view.
 
-- **Service Management**: List, create, and delete LocalInferenceService resources
-- **Pod Monitoring**: View pod status, logs, and events
-- **Interactive Scaling**: Scale deployments up/down
-- **Cleanup Tools**: Remove orphaned resources
-- **Real-time Updates**: Live status monitoring
+## The problem
 
-## Screenshots
+`kubectl get localinferenceservices` shows what models are declared. `kubectl get pods` shows pod status. `kubectl describe` shows events. `kubectl logs` shows server output. `nvidia-smi` shows GPU utilization. None of these talk to each other. When a model fails to load, you are running four commands in four terminals to figure out why.
 
-[Add screenshots here]
+## The idea
 
-## Prerequisites
+One TUI that pulls it all together. You see the CRD list. Select one, and you see its pods, events, logs, and GPU utilization side by side. Restart or scale from the same interface. It is the difference between `kubectl` and `kubectl` with context.
 
-- Go 1.19+
-- kubectl configured for cluster access
-- Local Inference Operator installed
+## Key bindings
 
-## Installation
+| key | action |
+|---|---|
+| `j`/`k` | navigate list |
+| `enter` | open resource detail |
+| `l` | view logs |
+| `e` | view events |
+| `r` | restart |
+| `s` | scale |
+| `g` | GPU view |
+| `q` | quit |
 
-```bash
-git clone https://github.com/yourusername/operator-tui.git
-cd operator-tui
-go mod tidy
-go build -o operator-tui
-```
-
-## Usage
+## Install
 
 ```bash
-./operator-tui
+go install github.com/santura-dev/inference-operator-tui@latest
 ```
 
-Navigate through menus to:
-- View active inference services
-- Create new model deployments
-- Monitor pod health and logs
-- Scale services
-- Clean up resources
+## Related
 
-## Controls
-
-- **↑↓**: Navigate items
-- **Enter**: Select action
-- **n**: New deployment
-- **m**: Monitor mode
-- **e**: Edit mode
-- **d**: Delete
-- **c**: Cleanup
-- **q/Ctrl+C**: Quit
-
-## Architecture
-
-Built with:
-- [Bubbletea](https://github.com/charmbracelet/bubbletea) - Terminal UI framework
-- [Bubbles](https://github.com/charmbracelet/bubbles) - UI components
-- [Lipgloss](https://github.com/charmbracelet/lipgloss) - Styling
-
-## Workflow
-
-1. **New Deployment**: Create LocalInferenceService CRD via guided form
-2. **Monitor**: View real-time pod status and resource usage
-3. **Edit**: Scale replicas, update configurations
-4. **Cleanup**: Remove failed deployments and orphaned resources
-
-## Integration
-
-Works with the [Local Inference Operator](https://github.com/yourusername/local-inference-operator) to provide a complete management experience.
-
-## Development
-
-```bash
-# Run in development
-go run main.go
-
-# Build optimized binary
-go build -o operator-tui -ldflags="-s -w"
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+- [local-inference-operator](https://github.com/santura-dev/local-inference-operator) - the operator this manages
+- [vllm-logprob-tui](https://github.com/santura-dev/vllm-logprob-tui) - TUI for vLLM logprobs and token statistics
+- [kubectl-tui](https://github.com/santura-dev/kubectl-tui) - general Kubernetes TUI with inference workload focus
 
 ## License
 
-MIT License - see LICENSE file for details
-
-## Related Projects
-
-- [local-inference-operator](https://github.com/yourusername/local-inference-operator) - The operator
-- [vllm-tui](https://github.com/yourusername/vllm-tui) - Chat interface
-- [kubectl-tui](https://github.com/yourusername/kubectl-tui) - kubectl interface
+MIT
