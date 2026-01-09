@@ -1,0 +1,25 @@
+# Binary
+operator-tui
+inference-operator-tui
+dist/
+
+# Build
+*.exe
+*.test
+*.out
+
+# Go
+vendor/
+
+# Env
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
