@@ -1,4 +1,4 @@
-module operator-tui
+module github.com/santura-dev/inference-operator-tui
 
 go 1.25.5
 

@@ -16,13 +16,14 @@ One TUI that pulls it all together. You see the CRD list. Select one, and you se
 
 | key | action |
 |---|---|
-| `j`/`k` | navigate list |
-| `enter` | open resource detail |
+| `↑`/`↓` | navigate list |
+| `enter` | open resource / confirm |
+| `d` | delete deployment (CRD, Deployment, Service) |
+| `s` | scale replicas |
+| `r` | restart deployment |
 | `l` | view logs |
-| `e` | view events |
-| `r` | restart |
-| `s` | scale |
-| `g` | GPU view |
+| `v` | describe pods |
+| `b` / `esc` | back |
 | `q` | quit |
 
 ## Install
@@ -30,6 +31,8 @@ One TUI that pulls it all together. You see the CRD list. Select one, and you se
 ```bash
 go install github.com/santura-dev/inference-operator-tui@latest
 ```
+
+Requires `kubectl` on PATH, configured against a cluster running [local-inference-operator](https://github.com/santura-dev/local-inference-operator). Pre-fill the new-deployment form with `--model` and `--runtime` flags.
 
 ## Related
 
