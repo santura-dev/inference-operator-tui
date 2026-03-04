@@ -4,6 +4,8 @@
 
 Terminal UI for local-inference-operator resources. CRDs, pod status, events, logs, GPU utilization in one view.
 
+![deployment list](assets/deployments.png)
+
 ## The problem
 
 `kubectl get localinferenceservices` shows what models are declared. `kubectl get pods` shows pod status. `kubectl describe` shows events. `kubectl logs` shows server output. `nvidia-smi` shows GPU utilization. None of these talk to each other. When a model fails to load, you are running four commands in four terminals to figure out why.
@@ -11,6 +13,8 @@ Terminal UI for local-inference-operator resources. CRDs, pod status, events, lo
 ## The idea
 
 One TUI that pulls it all together. You see the CRD list. Select one, and you see its pods, events, logs, and GPU utilization side by side. Restart or scale from the same interface. It is the difference between `kubectl` and `kubectl` with context.
+
+![yaml preview](assets/yaml-preview.png)
 
 ## Key bindings
 
