@@ -6,6 +6,7 @@ import (
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/bubbles/textinput"
+	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 
 	"github.com/santura-dev/inference-operator-tui/internal/config"
@@ -38,16 +39,18 @@ type Model struct {
 	batchInput      textinput.Model
 	spinner         spinner.Model
 
-	page     screen
-	focus    string
-	cfg      config.DeploymentConfig
-	status   string
-	logs     string
-	yaml     string
-	detail   string
-	selected string
-	deps     []kube.DeploymentInfo
-	ready    bool
+	page           screen
+	focus          string
+	cfg            config.DeploymentConfig
+	status         string
+	logs           string
+	yaml           string
+	detail         string
+	selected       string
+	deps           []kube.DeploymentInfo
+	ready          bool
+	detailViewport viewport.Model
+	width, height  int
 }
 
 // Item types for the list bubbles.
@@ -92,7 +95,7 @@ func New(cfg config.DeploymentConfig) Model {
 	sp := spinner.New()
 	sp.Spinner = spinner.Dot
 
-	return Model{
+	m := Model{
 		mainList:        l,
 		deploymentsList: dl,
 		configList:      cl,
@@ -106,6 +109,7 @@ func New(cfg config.DeploymentConfig) Model {
 		page:            screenMenu,
 		cfg:             cfg,
 	}
+	return m
 }
 
 func newList(title string, items []list.Item) list.Model {
